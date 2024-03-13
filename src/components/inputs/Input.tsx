@@ -8,7 +8,7 @@ type InputProps = {
   register: UseFormRegister<FieldValues>;
   required: boolean;
   errors: FieldErrors;
-  type: string;
+  type?: string;
   disabled: boolean;
 };
 
