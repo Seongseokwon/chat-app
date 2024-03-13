@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid credentials 1");
         }
 
         const { email, password } = credentials;
@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid credentials 2");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -56,18 +56,18 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid credentials 3");
         }
 
         return user;
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXT_PUBLIC_JWT_SECRET,
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);

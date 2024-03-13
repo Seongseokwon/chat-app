@@ -29,7 +29,7 @@ const AuthForm = ({}: AuthFormProps) => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
@@ -42,8 +42,9 @@ const AuthForm = ({}: AuthFormProps) => {
           })
         )
         .then((callback) => {
+          console.log(callback);
           if (callback?.error) {
-            toast.error("Invalid credentials");
+            toast.error("Invalid credentials 회원가입 에러");
           }
 
           if (callback?.ok) {
@@ -120,7 +121,7 @@ const AuthForm = ({}: AuthFormProps) => {
         ms:px-10
       `}
       >
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {variant === "REGISTER" ? (
             <Input
               disabled={isLoading}
@@ -185,7 +186,11 @@ const AuthForm = ({}: AuthFormProps) => {
                 ? "메신저를 처음 사용하시나요"
                 : "이미 계정이 있나요?"}
             </div>
-            <div className="underline cursor-pointer">
+            <div
+              onClick={toggleVariant}
+              role="presentation"
+              className="underline cursor-pointer"
+            >
               {variant === "LOGIN" ? "계정 만들기" : "로그인하기"}
             </div>
           </div>
