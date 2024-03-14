@@ -53,7 +53,13 @@ const ConversationList = ({
           </div>
         </div>
       </div>
-      <ConversationBox />
+      {items.map((item) => (
+        <ConversationBox
+          key={item.id}
+          data={item}
+          selected={conversationId === item.id}
+        />
+      ))}
     </aside>
   );
 };
