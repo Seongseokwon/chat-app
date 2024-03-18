@@ -11,6 +11,7 @@ type ConversationLayoutProps = {
 const ConversationLayout = async ({ children }: ConversationLayoutProps) => {
   const users = await getUsers();
   const conversations = await getConversations();
+
   return (
     <Sidebar>
       <div className="h-full">

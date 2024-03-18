@@ -50,8 +50,13 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
     return seenArray.filter((user) => user.email === userEmail).length !== 0;
   }, [userEmail, lastMessage]);
 
+  const handleClick = () => {
+    router.push(`/conversations/${data.id}`);
+  };
   return (
     <div
+      role="presentation"
+      onClick={handleClick}
       className={clsx(
         `
     w-full

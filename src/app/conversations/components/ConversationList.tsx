@@ -20,7 +20,7 @@ const ConversationList = ({
   const [items, setItems] = useState(initialItems);
   const { conversationId, isOpen } = useConversation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(initialItems);
   return (
     <aside
       className={clsx(
@@ -53,13 +53,14 @@ const ConversationList = ({
           </div>
         </div>
       </div>
-      {items.map((item) => (
-        <ConversationBox
-          key={item.id}
-          data={item}
-          selected={conversationId === item.id}
-        />
-      ))}
+      {items.length !== 0 &&
+        items?.map((item) => (
+          <ConversationBox
+            key={item.id}
+            data={item}
+            selected={conversationId === item.id}
+          />
+        ))}
     </aside>
   );
 };

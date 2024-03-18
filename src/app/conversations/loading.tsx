@@ -1,7 +1,9 @@
+import LoadingModal from "@/components/modals/LoadingModal";
+
 type LoadingProps = {};
 
 const Loading = ({}: LoadingProps) => {
-  return <div>Loading</div>;
+  return <LoadingModal />;
 };
 
 export default Loading;
