@@ -5,6 +5,7 @@ import { User } from "@prisma/client";
 import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 import Avatar from "../Avatar";
+import { signOut } from "next-auth/react";
 
 type DesktopSidebarProps = {
   currentUser: User;
@@ -21,6 +22,7 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
       lg: inset-y-0
       lg:left-0
       lg:z-40
+      lg:w-20
       xl:px-6
       lg:overflow-y-auto
       lg:bg-orange-400
@@ -70,6 +72,7 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
           role="presentation"
           onClick={() => setIsOpen(true)}
         >
+          <button onClick={() => signOut()}>로그아웃 </button>
           <Avatar user={currentUser} />
         </div>
       </nav>

@@ -30,7 +30,7 @@ const ConversationDetail = async ({
     <div className="h-full lg:pl-80">
       <div className="flex flex-col h-full">
         <Header conversation={conversation} />
-        {/* <Body initialMessage={messages} /> */}
+        <Body initialMessage={messages} />
         <Form />
       </div>
     </div>

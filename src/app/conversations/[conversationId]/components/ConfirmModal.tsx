@@ -29,6 +29,7 @@ const ConfirmModal = ({ isOpen, onClose }: ConfirmModalProps) => {
         onClose();
         router.push("/conversations");
         router.refresh();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);

@@ -20,7 +20,7 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
 
   const lastMessage = useMemo(() => {
     const messages = data.messages || [];
-    return messages[data.messages.length - 1];
+    return messages[messages.length - 1];
   }, [data.messages]);
 
   const lastMessageText = useMemo(() => {

@@ -1,6 +1,7 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/prismadb";
+import { pusherSever } from "@/libs/pusher";
 
 export async function POST(req: NextRequest) {
   try {
@@ -52,6 +53,13 @@ export async function POST(req: NextRequest) {
         users: true,
       },
     });
+
+    newConversation.users.map((user) => {
+      if (user.email) {
+        pusherSever.trigger(user.email, "conversation:new", newConversation);
+      }
+    });
+
     return NextResponse.json(newConversation);
   } catch (err) {
     return new NextResponse("Internal Server Error", { status: 500 });
