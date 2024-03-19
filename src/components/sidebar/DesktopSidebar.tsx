@@ -6,6 +6,7 @@ import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 import Avatar from "../Avatar";
 import { signOut } from "next-auth/react";
+import SettingsModal from "./SettingsModal";
 
 type DesktopSidebarProps = {
   currentUser: User;
@@ -15,8 +16,14 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div
-      className={`
+    <>
+      <SettingsModal
+        currentUser={currentUser}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
+      <div
+        className={`
       hidden
       lg:fixed
       lg: inset-y-0
@@ -32,51 +39,52 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
       lg:flex-col
       justify-between
     `}
-    >
-      <nav
-        className={`
+      >
+        <nav
+          className={`
         flex
         flex-col
         justify-between
         mt-4
       `}
-      >
-        <ul className={`flex flex-col items-center space-y-1`}>
-          {routes.map((route, i) => (
-            <DesktopItem
-              key={route.label}
-              href={`${route.href}`}
-              label={route.label}
-              icon={route.icon}
-              active={route.active}
-              onClick={route.onClick}
-            />
-          ))}
-        </ul>
-      </nav>
-      <nav
-        className={`
+        >
+          <ul className={`flex flex-col items-center space-y-1`}>
+            {routes.map((route, i) => (
+              <DesktopItem
+                key={route.label}
+                href={`${route.href}`}
+                label={route.label}
+                icon={route.icon}
+                active={route.active}
+                onClick={route.onClick}
+              />
+            ))}
+          </ul>
+        </nav>
+        <nav
+          className={`
         flex
         flex-col
         items-center
         justify-between
         mt-4
       `}
-      >
-        <div
-          className={`
+        >
+          <div
+            className={`
           transition
           cursor-pointer
           hover:opacity-70
         `}
-          role="presentation"
-          onClick={() => setIsOpen(true)}
-        >
-          <button onClick={() => signOut()}>로그아웃 </button>
-          <Avatar user={currentUser} />
-        </div>
-      </nav>
-    </div>
+            role="presentation"
+            onClick={() => setIsOpen(true)}
+          >
+            <button onClick={() => signOut()}>로그아웃 </button>
+            <Avatar user={currentUser} />
+          </div>
+        </nav>
+      </div>
+    </>
   );
 };
 
