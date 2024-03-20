@@ -1,7 +1,36 @@
-type SelectProps = {};
+import ReactSelect from "react-select";
 
-const Select = ({}: SelectProps) => {
-  return <div>Select</div>;
+type SelectProps = {
+  label: string;
+  value?: Record<string, any>;
+  onChange: (value: Record<string, any>) => void;
+  options: Record<string, any>[];
+  disabled: boolean;
+};
+
+const Select = ({ label, value, onChange, options, disabled }: SelectProps) => {
+  return (
+    <div>
+      <label className="block text-sm font-medium leading-6 text-gray-900">
+        <div className="mt-2">
+          <ReactSelect
+            isDisabled={disabled}
+            value={value}
+            onChange={onChange}
+            isMulti
+            options={options}
+            menuPortalTarget={document.body}
+            styles={{
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+            }}
+            classNames={{
+              control: () => "text-sm",
+            }}
+          />
+        </div>
+      </label>
+    </div>
+  );
 };
 
 export default Select;
